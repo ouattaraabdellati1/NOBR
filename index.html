@@ -3,39 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOBR</title>
+  <title>Suivi personnel</title>
   <link rel="stylesheet" href="AppliBr.css">
   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0F1318">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-icon" href="icone.png">
+  <meta name="theme-color" content="#0F1318">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icone.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="app">
-    <div class="streak-number" id="streak-number">0</div>
-    <div class="streak-label">jours consécutifs</div>
-    <p>Record : <span id="streak-best">0</span> jours</p>
 
-    <button onclick="signalerRechute()">Signaler une rechute</button>
-    <button onclick="ouvrirUrgence()" style="background:#D9A05B; margin-top:10px;">
-      J'ai une pulsion
-    </button>
+    <!-- PAGE ACCUEIL -->
+    <div class="page active" id="page-accueil">
+      <div class="quote">« Chaque jour compte. »</div>
 
-    <hr style="margin:30px 0; border-color:#333F4C;">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 220 220">
+          <circle class="ring-bg" cx="110" cy="110" r="95"></circle>
+          <circle class="ring-fg" id="ring-fg" cx="110" cy="110" r="95"></circle>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-num" id="streak-number">0</div>
+          <div class="ring-label">jours consécutifs</div>
+        </div>
+      </div>
+      <div class="record">Record : <b id="streak-best">0</b> jours</div>
 
-    <h3>Journal du jour</h3>
+      <button class="btn-urgent" onclick="ouvrirUrgence()">J'ai une pulsion</button>
+      <div class="sub">Respiration guidée · 2 minutes</div>
 
-    <p>Niveau de tentation</p>
-    <div class="scale-row" id="scale-row"></div>
+      <div class="reset-link" onclick="signalerRechute()">Signaler une rechute</div>
+    </div>
 
-    <p>Déclencheurs</p>
-    <div class="chip-row" id="chip-row"></div>
+    <!-- PAGE JOURNAL -->
+    <div class="page" id="page-journal">
+      <h2>Journal du jour</h2>
+      <p class="label">Niveau de tentation</p>
+      <div class="scale-row" id="scale-row"></div>
+      <p class="label">Déclencheurs</p>
+      <div class="chip-row" id="chip-row"></div>
+      <button class="btn-main" onclick="enregistrerEntree()">Enregistrer</button>
+      <p class="label" style="margin-top:24px;">Historique</p>
+      <div id="liste-entrees"></div>
+    </div>
 
-    <button onclick="enregistrerEntree()" style="margin-top:16px;">Enregistrer</button>
+    <!-- PAGE STATS -->
+    <div class="page" id="page-stats">
+      <h2>Progression</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-total">0</div>
+          <div class="stat-lbl">jours cumulés</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-best">0</div>
+          <div class="stat-lbl">meilleur streak</div>
+        </div>
+      </div>
+      <div class="insight" id="stat-insight">Ajoute des entrées de journal pour voir tes tendances.</div>
+    </div>
 
-    <h3 style="margin-top:30px;">Historique</h3>
-    <div id="liste-entrees"></div>
+    <!-- NAVIGATION -->
+    <div class="nav">
+      <button class="nav-btn active" data-page="accueil" onclick="showPage('accueil')">Accueil</button>
+      <button class="nav-btn" data-page="journal" onclick="showPage('journal')">Journal</button>
+      <button class="nav-btn" data-page="stats" onclick="showPage('stats')">Stats</button>
+    </div>
   </div>
 
   <div class="overlay hidden" id="urgence-overlay">
@@ -44,7 +80,7 @@
     <p style="color:#8B95A1; max-width:260px;">
       Le pic de pulsion redescend en général en 10 à 20 minutes.
     </p>
-    <button onclick="fermerUrgence()">Fermer</button>
+    <button class="btn-main" onclick="fermerUrgence()">Fermer</button>
   </div>
 
   <script src="AplliBr.js"></script>
