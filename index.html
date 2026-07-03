@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOBR</title>
+  <link rel="stylesheet" href="AppliBr.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0F1318">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icone.png">
+</head>
+<body>
+  <div class="app">
+    <div class="streak-number" id="streak-number">0</div>
+    <div class="streak-label">jours consécutifs</div>
+    <p>Record : <span id="streak-best">0</span> jours</p>
+
+    <button onclick="signalerRechute()">Signaler une rechute</button>
+    <button onclick="ouvrirUrgence()" style="background:#D9A05B; margin-top:10px;">
+      J'ai une pulsion
+    </button>
+
+    <hr style="margin:30px 0; border-color:#333F4C;">
+
+    <h3>Journal du jour</h3>
+
+    <p>Niveau de tentation</p>
+    <div class="scale-row" id="scale-row"></div>
+
+    <p>Déclencheurs</p>
+    <div class="chip-row" id="chip-row"></div>
+
+    <button onclick="enregistrerEntree()" style="margin-top:16px;">Enregistrer</button>
+
+    <h3 style="margin-top:30px;">Historique</h3>
+    <div id="liste-entrees"></div>
+  </div>
+
+  <div class="overlay hidden" id="urgence-overlay">
+    <div class="breath-circle" id="breath-circle">Inspire</div>
+    <div class="timer" id="timer">2:00</div>
+    <p style="color:#8B95A1; max-width:260px;">
+      Le pic de pulsion redescend en général en 10 à 20 minutes.
+    </p>
+    <button onclick="fermerUrgence()">Fermer</button>
+  </div>
+
+  <script src="AplliBr.js"></script>
+</body>
+</html>
